@@ -39,9 +39,9 @@
             <div class="subtitle">by IT Faculty and APD</div>
             <img src="css/imgs/hero-kite.gif" alt="" id="kite">
         </div>
+        <img src="css/imgs/hero-birds.gif" alt="" id="birds">
         <img src="css/imgs/hero-fence.png" alt="" id="fence">
         <img src="css/imgs/hero-plant.gif" alt="" id="plant">
-        <img src="css/imgs/hero-birds.gif" alt="" id="birds">
     </div>
     <div id="about" class="section">
         <img src="css/imgs/about-cloud.png" alt="" id="cloud-1">
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div id="body">
-                <div id="text">TamFrame is a project by FEU Diliman’s IT Faculty and APD, led by its Director, Mr. Vernie John Baltazar, to welcome students at the start of the academic year through customized digital profile frames.</div>
+                <div id="text">TamFrame is a project by FEU Diliman’s IT Faculty and APD, led by IT Faculty Director, Mr. Vernie John Baltazar, to welcome students at the start of the academic year through customized digital profile frames.</div>
                 <div id="buttonHolder" id="visitBtn">
                     <button id="visitBtn" class="medium">Visit APD ⇢</button>
                 </div>
@@ -69,19 +69,18 @@
         <img src="css/imgs/about-cloud.png" alt="" id="cloud-3">
     </div>
     <div id="edit" class="section">
+        <img src="css/imgs/edit-city.png" alt="" id="city">
         <div id="content">
             <section>
                 <div id="startView">
                     <form>
                         <!-- Frame Selection -->
                         <label for="frameSelect">Choose a Frame:</label>
-                        <select id="frameSelect" class="input">
-                            <option value="frames/faculty-it.png" selected>Faculty</option>
-                            <option value="frames/student-agd.png">Student - Animation and Game Development</option>
-                            <option value="frames/student-cst.png">Student - Cybersecurity</option>
-                            <option value="frames/student-se.png">Student - Software Engineering</option>
-                            <option value="frames/student-wma.png">Student - Web and Mobile Application</option>
-                        </select>
+                        <div id="frameSelect" class="input">
+                            <div id="group"></div>
+                            <div id="menu" class="bi bi-caret-down-fill"></div>
+                            <div id="selected">Select</div>
+                        </div>
 
                         <!-- Upload -->
                         <label for="upload">Upload Your Picture:</label>
@@ -93,7 +92,7 @@
                             <button id="downloadBtn" disabled>Download</button>
                         </div>
                     </form>
-                    <footer>Create your own?</footer>
+                    <div class="footer">Create your own?</div>
                 </div>
                 <div id="editView" class="input hide">
                     <button id="bakcBtn" type="button">Back</button>
@@ -117,9 +116,20 @@
                 <canvas id="previewCanvas" width="1080" height="1080"></canvas>
             </section>
         </div>
-    
-        <img src="css/imgs/edit-city.png" alt="" id="city">
     </div>
+    <footer>
+        <div>
+            Created in 2025.
+        </div>
+        <div>
+            Project Tamframe is a non-profit project and being used for educational purpose only.
+            Assets were taken from the Canva platform thus we do not own any of them. 
+            Any concerns may be referred to <a href="mailto:apd.feud@gmail.com">apd.feud@gmail.com</a> or message us via <a href="https://www.fb.com/FEUD.APD">Facebook</a>. 
+        </div>
+        <div>
+            The Composer (‘create your own’) feature allows users to reuse this template with their own frames. If this feature is used, attribution is not required, though informing us is much appreciated.
+        </div>
+    </footer>
     <script src="js/script.js"></script>    
 </body>
 </html>

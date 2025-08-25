@@ -37,13 +37,16 @@ button {
     cursor: pointer;
     border-radius: 18px;
 }
+.sticky {
+    position: sticky !important;
+} 
 
 body {
     background-color: var(--white);
 }
 
 .cover {
-    background-color: rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.5);
     height: 100vh;
     width: 100vw;
     backdrop-filter: blur(25px);
@@ -56,6 +59,8 @@ body {
     display: flex;
     flex-direction: column;
     position: fixed;
+    z-index: 100000;
+    overflow: hidden;
 }
 #loadingAssets #animationContainer {
     position: relative;
@@ -91,7 +96,7 @@ nav {
     --text-margin: -4px;
     position: sticky;
     top: 0;
-    z-index: 10000;
+    z-index: 90000;
 }
 nav * {
     color: var(--primary);
@@ -130,7 +135,7 @@ nav #menu #group {
     flex-direction: column;
     gap: 0px 35px;
     padding: 8px 10px;
-    z-index: 1000;
+    z-index: 91000;
 }
 nav.hide-option #menu #group {
     display: none;
@@ -159,10 +164,11 @@ nav #menu #group .item:hover::after {
 .section {
     width: 100vw;
     height: 100vh;
-    position: relative;
     display: block;
     overflow: hidden;
     scroll-behavior: smooth;
+    position: sticky;
+    top: 0;
 }
 .section > * {
     position: absolute;
@@ -172,6 +178,7 @@ nav #menu #group .item:hover::after {
     height: calc(var(--nav-height) * -1 + 100vh);
     background-image: url('imgs/hero-background.png');
     background-position: center bottom;
+    background-attachment: fixed;
     --title-width: min(calc(100vw - 20px), 70vh);
 }
 #hero.section #title {
@@ -186,7 +193,7 @@ nav #menu #group .item:hover::after {
     align-items: center;
     justify-content: center;
     --three-percent: calc(var(--title-width) * 0.03);
-    position: relative;
+    position: fixed;
 }   
 #hero.section #title .header {
     font-family: 'Bungee', 'Poppins', 'sans-serif';
@@ -223,14 +230,17 @@ nav #menu #group .item:hover::after {
     transform: translate(00%, 30%);
 }
 #hero.section #birds {
+    position: fixed;
     top: 0;
     left: 0;
-    transform: translate(-40%, -40%);
+    transform: translate(-40%, -10%);
     width: 57.29vw;
 }
 
 #about.section {
     background-color: #faf0e1;
+    position: sticky !important;
+    top: 0;
 }
 #about.section #bldg {
     bottom: 0;
@@ -308,6 +318,7 @@ nav #menu #group .item:hover::after {
     height: inherit;
 }
 #about.section #tree {
+    position: absolute;
     bottom: 0;
     left: 0%;
     transform: translate(20%, 20%);
@@ -338,18 +349,26 @@ nav #menu #group .item:hover::after {
 
 #edit.section {
     background-image: url('imgs/edit-background.png');
+    height: fit-content;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px;
 }
 #edit.section * {
     color: var(--white);
     font-size: 18px;
 }
 #edit.section #content {
-    top: 50%;
+    position: static;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
     display: flex;
     gap: 50px 50px;
     flex-direction: column;
+    z-index: 200;
 }
 
 #edit.section section {
@@ -361,8 +380,16 @@ nav #menu #group .item:hover::after {
     display: flex;
     flex-direction: column;
 }
-#edit.section footer {
+#edit.section .footer {
     font-size: 14px;
+    font-style: italic;
+    cursor: pointer;
+}
+#edit.section .footer:hover {
+    text-decoration: underline dotted;
+}
+#edit.section label {
+    margin-bottom: 7px;
 }
 #edit.section form .input {
     background-color: var(--white);
@@ -373,23 +400,51 @@ nav #menu #group .item:hover::after {
     width: min(calc(100vw - 40px), 432px) !important;
     margin-bottom: 20px;
 }
-#edit.section label {
-    margin-bottom: 7px;
+#edit.section #frameSelect {
+    display: flex;
+    position: relative;
 }
-#edit.section #content section #startView form select {
-    appearance: none;          
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: white;
+#edit.section #frameSelect * {
     color: var(--gray);
 }
-
+#edit.section #frameSelect #menu {
+    width: 44px;
+    text-align: center;
+    cursor: pointer;
+}
+#edit.section #frameSelect #selected {
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+#edit.section #frameSelect #group {
+    position: absolute;
+    top: 120%;
+    background-color: var(--white);
+    padding: 5px;
+    z-index: 500;
+    border-radius: 3px;
+    display: none;
+}
+#edit.section #frameSelect #group .option {
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 0;
+}
+#edit.section #frameSelect #group .option:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+#edit.section #frameSelect #group .option:hover {
+    background-color: #ddd;
+}
+#edit.section #frameSelect.toggled #group {
+    display: block;
+}
 #edit.section #city {
     bottom: 0;
     right: 50%;
-    transform: translate(100%, 60%);
-    width: 60vw;
-    width: min(calc(100vw - 40px), 432px) !important;
+    transform: translate(80%, 36%);
+    width: 100vw;
 }
 #edit.section #previewCanvas {
     display: block;
@@ -404,7 +459,6 @@ nav #menu #group .item:hover::after {
     border: 2px solid var(--white);
     padding: 3px 21px;
     position: relative;
-    /* overflow: hidden; */
 }
 #edit.section button:first-child {
     margin-right: 5px;
@@ -425,13 +479,6 @@ nav #menu #group .item:hover::after {
     background-color: #aaa !important;
     border: 2px solid #aaa !important;
     color: var(--gray) !important;
-}
-#edit.section footer {
-    font-style: italic;
-    cursor: pointer;
-}
-#edit.section footer:hover {
-    text-decoration: underline dotted;
 }
 #edit.section #initialView {
     display: flex;
@@ -466,6 +513,9 @@ nav #menu #group .item:hover::after {
 }
 
 @media only screen and (min-width: 900px) {
+    #edit.section {
+        align-items: center;
+    }
     #edit.section #content {
         flex-direction: row;
     }
@@ -500,7 +550,7 @@ nav #menu #group .item:hover::after {
     }
     #hero.section #birds {
         width: 20vh;
-        transform: translate(80%, 10%);
+        transform: translate(80%, 87%);
     }
 
     #about.section #article {
@@ -556,4 +606,28 @@ nav #menu #group .item:hover::after {
         transform: translate(-60%, -30%);
         width: 80vw;
     }
+}
+
+footer {
+    position: relative;
+    z-index: 99000;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(153, 178, 230);
+    padding: 100px 25px;
+
+}
+
+footer * {
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+}
+
+footer > * {
+    margin-bottom: 20px;
+    max-width: 600px;
 }

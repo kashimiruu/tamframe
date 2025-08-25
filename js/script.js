@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     navGroup.querySelector('.compose').onclick = () => {
         window.open('./compose.html', '_self');  
     };
+    document.querySelector('#edit.section footer').onclick = () => {
+        window.open('./compose.html', '_self');  
+    };
 
     body.querySelectorAll('#visitBtn').forEach(el => el.addEventListener('click', () => {
         window.open('https://www.facebook.com/FEUD.APD', '_blank');
@@ -207,5 +210,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         link.click();
     });
 
-    hideCover(loadingCover);
+    // Wait for assets before hiding loading cover
+    function preloadAssets(imagePaths, callback) {
+        let loadedCount = 0;
+        const total = imagePaths.length;
+
+        imagePaths.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedCount++;
+                if (loadedCount === total) {
+                    callback();
+                }
+            };
+            img.onerror = () => {
+                console.warn("Failed to load:", src);
+                loadedCount++;
+                if (loadedCount === total) {
+                    callback();
+                }
+            };
+        });
+    }
+
+    // Usage in your index.js
+    window.addEventListener("load", () => {
+        const framePaths = [
+            "frames/faculty-it.png",
+            "frames/student-agd.png",
+            "frames/student-cst.png",
+            "frames/student-se.png",
+            "frames/student-wma.png"
+        ];
+
+        preloadAssets(framePaths, () => {
+            hideCover(loadingCover);
+            document.getElementById("loadingCover").style.display = "none";
+        });
+    });
 });

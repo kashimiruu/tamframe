@@ -59,6 +59,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             behavior: 'smooth'
         });
     });
+    navGroup.querySelector('.compose').onclick = () => {
+        window.open('./compose.html', '_self');  
+    };
 
     body.querySelectorAll('#visitBtn').forEach(el => el.addEventListener('click', () => {
         window.open('https://www.facebook.com/FEUD.APD', '_blank');

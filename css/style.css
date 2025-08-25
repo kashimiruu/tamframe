@@ -376,6 +376,13 @@ nav #menu #group .item:hover::after {
 #edit.section label {
     margin-bottom: 7px;
 }
+#edit.section #content section #startView form select {
+    appearance: none;          
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    color: var(--gray);
+}
 
 #edit.section #city {
     bottom: 0;

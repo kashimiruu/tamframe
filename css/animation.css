@@ -1,0 +1,20 @@
+@keyframes hide-cover {
+    0% {
+        transform: translateY(0%);
+    }    
+    100% {
+        transform: translateY(-100%);
+    }    
+}
+
+@keyframes leaf-spin {
+    0% {
+        transform: translate(0) rotateZ(0);
+    }
+    10% {
+        transform: translateY(-15px) rotateY(360deg);
+    }
+    30% {
+        transform: translate(0) rotateY(720deg);
+    }
+}

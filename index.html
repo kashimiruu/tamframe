@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tamframe</title>
+    <link rel="icon" type="image/png" href="css/imgs/icon.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="loadingAssets" class="cover">
+        <div id="animationContainer">
+            <div id="frame" class="icon"></div>
+            <div id="leaf" class="icon"></div>
+        </div>
+        <div id="textContainer">Loading...</div>
+    </div>
+    <nav class="hide-option">
+        <div id="logo">
+            <img src="css/imgs/icon.png" alt="">
+            <div id="text">
+                Tam<span class="medium">Frame</span>
+            </div>
+        </div>
+        <div id="menu">
+            <div id="icon"><i class="bi bi-list"></i></div>
+            <div id="group">
+                <div class="item about">About</div>
+                <div class="item editor">Editor</div>
+                <div class="item compose">Compose</div>
+            </div>
+        </div>
+    </nav>
+    <div id="hero" class="section">
+        <div id="title">
+            <div class="header">Project</div>
+            <div class="header">Tamframe</div>
+            <div class="subtitle">by IT Faculty and APD</div>
+            <img src="css/imgs/hero-kite.gif" alt="" id="kite">
+        </div>
+        <img src="css/imgs/hero-fence.png" alt="" id="fence">
+        <img src="css/imgs/hero-plant.gif" alt="" id="plant">
+        <img src="css/imgs/hero-birds.gif" alt="" id="birds">
+    </div>
+    <div id="about" class="section">
+        <img src="css/imgs/about-cloud.png" alt="" id="cloud-1">
+        <img src="css/imgs/about-cloud.png" alt="" id="cloud-2">
+        <img src="css/imgs/about-city.png" alt="" id="city">
+        <img src="css/imgs/about-bldg.png" alt="" id="bldg">
+        <div id="article">
+            <div id="title" class="medium">
+                <div>What is</div>
+                <div id="header">
+                    <span class="header">TAM</span>
+                    <span class="header">FRAME</span>
+                    ?
+                </div>
+            </div>
+            <div id="body">
+                <div id="text">TamFrame is a project by FEU Diliman’s IT Faculty and APD, led by its Director, Mr. Vernie John Baltazar, to welcome students at the start of the academic year through customized digital profile frames.</div>
+                <div id="buttonHolder" id="visitBtn">
+                    <button id="visitBtn" class="medium">Visit APD ⇢</button>
+                </div>
+            </div>
+        </div>
+        <img src="css/imgs/about-gale.gif" alt="" id="gale">
+        <img src="css/imgs/about-tree.gif" alt="" id="tree">
+        <img src="css/imgs/about-cloud.png" alt="" id="cloud-3">
+    </div>
+    <div id="edit" class="section">
+        <div id="content">
+            <section>
+                <div id="startView">
+                    <form>
+                        <!-- Frame Selection -->
+                        <label for="frameSelect">Choose a Frame:</label>
+                        <select id="frameSelect" class="input">
+                            <option value="frames/faculty-it.png" selected>Faculty</option>
+                            <option value="frames/student-agd.png">Student - Animation and Game Development</option>
+                            <option value="frames/student-cst.png">Student - Cybersecurity</option>
+                            <option value="frames/student-se.png">Student - Software Engineering</option>
+                            <option value="frames/student-wma.png">Student - Web and Mobile Application</option>
+                        </select>
+
+                        <!-- Upload -->
+                        <label for="upload">Upload Your Picture:</label>
+                        <input type="file" id="upload" accept="image/*" class="input">
+
+                        <!-- Controls -->
+                        <div id="buttonGroup">
+                            <button id="editBtn" type="button">Edit</button>
+                            <button id="downloadBtn" disabled>Download</button>
+                        </div>
+                    </form>
+                    <footer>Create your own?</footer>
+                </div>
+                <div id="editView" class="input hide">
+                    <button id="bakcBtn" type="button">Back</button>
+
+                    <!-- Zoom Effect -->
+                    <label for="paddingSlider" >Zoom Out Image:</label>
+                    <input type="range" id="paddingSlider" min="0.5" max="2" step="0.1" value="1" class="input">
+
+                    <!-- Horizontal Alignment -->
+                    <label for="hAlignSlider">Horizontal Alignment:</label>
+                    <input type="range" id="hAlignSlider" min="-50" max="50" step="1" value="0" class="input">
+
+                    <!-- Vertical Alignment -->
+                    <label for="vAlignSlider">Vertical Alignment:</label>
+                    <input type="range" id="vAlignSlider" min="-50" max="50" step="1" value="0" class="input">
+
+                </div>
+            </section>
+            <section>
+                <!-- Preview -->    
+                <canvas id="previewCanvas" width="1080" height="1080"></canvas>
+            </section>
+        </div>
+    
+        <img src="css/imgs/edit-city.png" alt="" id="city">
+    </div>
+    <script src="js/script.js"></script>    
+</body>
+</html>

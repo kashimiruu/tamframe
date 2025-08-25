@@ -415,6 +415,7 @@ nav #menu #group .item:hover::after {
 #edit.section #frameSelect #selected {
     flex-shrink: 1;
     flex-grow: 1;
+    cursor: pointer;
 }
 #edit.section #frameSelect #group {
     position: absolute;

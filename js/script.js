@@ -32,8 +32,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const canvas = document.getElementById('previewCanvas');
     const ctx = canvas.getContext('2d');
 
-    loadingCover.style.display = "none"; // hideCover(loadingCover);
-
     // Function to show and hide menu options for medium and smaller viewports
     window.showMenu = false;
     window.addEventListener('resize', () => {
@@ -205,4 +203,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         link.href = canvas.toDataURL();
         link.click();
     });
+
+    hideCover(loadingCover);
 });

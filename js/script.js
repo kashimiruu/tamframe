@@ -172,23 +172,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     const frameOptions = [
         {
             name: "IT Faculty",
-            value: "/frames/faculty-it.png",
+            value: "./frames/faculty-it.png",
         },
         {
             name: "BSIT - AGD",
-            value: "/frames/student-agd.png",
+            value: "./frames/student-agd.png",
         },
         {
             name: "BSIT - CST",
-            value: "/frames/student-cst.png",
+            value: "./frames/student-cst.png",
         },
         {
             name: "BSCS - SE",
-            value: "/frames/student-se.png",
+            value: "./frames/student-se.png",
         },
         {
             name: "BSIT - WMA",
-            value: "/frames/student-wma.png",
+            value: "./frames/student-wma.png",
         },
     ]
 

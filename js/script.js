@@ -197,14 +197,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.showFramesOption = false;
     let frameImage = null;
 
-    const frameBtn = frameSelect?.querySelector('#menu');
     const frameGroup = frameSelect?.querySelector('#group');
     const frameSelected = frameSelect?.querySelector('#selected');
-    frameBtn?.addEventListener('click', toggleFrames);
     frameSelected,addEventListener('click', toggleFrames);
     body.addEventListener('click', (event) => {
-        if (!frameBtn.contains(event.target) && !frameSelected.contains(event.target)) {
-            showFramesOption = true;
+        if (!frameSelected.contains(event.target)) {
+            showFramesOption = false;
             toggleFrames();
         }
     });

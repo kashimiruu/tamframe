@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     frameOptions.forEach(option => {
         if (frameGroup) frameGroup.innerHTML += `
-            <div class="option input" onclick="selectFrame('${option.value}', '${option.name}')"> ${option.name} </div>
+            <div class="option input" onclick="selectFrame('${window.location.href + option.value}', '${option.name}')"> ${option.name} </div>
         `;
     });
     selectFrame(frameOptions[0].value, frameOptions[0].name);

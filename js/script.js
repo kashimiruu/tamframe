@@ -16,7 +16,7 @@ function hideOption(nav) {
 
 function selectFrame(value, name) {
     const selected = document.querySelector('#frameSelect #selected');
-    selected.innerHTML = name;
+    if (selected) selected.innerHTML = name;
 
     frameImage = new Image();
     frameImage.src = value;
@@ -32,7 +32,7 @@ function toggleFrames() {
 // Enable/disable download button and sliders
 function updateUIControls() {
     const canUse = uploadedImage && frameImage;
-    [downloadBtn, paddingSlider, hAlignSlider,vAlignSlider].forEach(control => {if(control) control.disabled = !canUse});
+    if (downloadBtn) [downloadBtn, paddingSlider, hAlignSlider,vAlignSlider].forEach(control => {if(control) control.disabled = !canUse});
 }
 
 // Wait for assets before hiding loading cover
@@ -61,14 +61,14 @@ function preloadAssets(imagePaths, callback) {
 
 // Draw preview function
 function drawPreview() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx?.clearRect(0, 0, canvas.width, canvas.height);
 
     // ✅ White background
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (ctx) ctx.fillStyle = "white";
+    ctx?.fillRect(0, 0, canvas.width, canvas.height);
 
     const basePaddingPercent = 15; // Base padding in percent
-    const zoomMultiplier = parseFloat(paddingSlider.value); // 0.5 to 2
+    const zoomMultiplier = parseFloat(paddingSlider?.value); // 0.5 to 2
     const paddingPercent = (basePaddingPercent * zoomMultiplier) / 100; // fixed
     const usableWidth = canvas.width * (1 - 2 * paddingPercent);
     const usableHeight = canvas.height * (1 - 2 * paddingPercent);
@@ -121,10 +121,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const editBtn = document.querySelector('#editBtn');
     const frameSelect = document.getElementById('frameSelect');
     const uploadInput = document.getElementById('upload');
-    const paddingSlider = document.getElementById('paddingSlider');
-    const hAlignSlider = document.getElementById('hAlignSlider');
-    const vAlignSlider = document.getElementById('vAlignSlider');
-    const downloadBtn = document.getElementById('downloadBtn');
+    window.paddingSlider = document.getElementById('paddingSlider');
+    window.hAlignSlider = document.getElementById('hAlignSlider');
+    window.vAlignSlider = document.getElementById('vAlignSlider');
+    window.downloadBtn = document.getElementById('downloadBtn');
     window.canvas = document.getElementById('previewCanvas');
     window.ctx = canvas?.getContext('2d');
 
@@ -197,10 +197,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.showFramesOption = false;
     let frameImage = null;
 
-    const frameBtn = frameSelect.querySelector('#menu');
-    const frameGroup = frameSelect.querySelector('#group');
-    const frameSelected = frameSelect.querySelector('#selected');
-    frameBtn.addEventListener('click', toggleFrames);
+    const frameBtn = frameSelect?.querySelector('#menu');
+    const frameGroup = frameSelect?.querySelector('#group');
+    const frameSelected = frameSelect?.querySelector('#selected');
+    frameBtn?.addEventListener('click', toggleFrames);
     frameSelected,addEventListener('click', toggleFrames);
     body.addEventListener('click', (event) => {
         if (!frameBtn.contains(event.target) && !frameSelected.contains(event.target)) {
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         toggleFrames();
     });
     frameOptions.forEach(option => {
-        frameGroup.innerHTML += `
+        if (frameGroup) frameGroup.innerHTML += `
             <div class="option input" onclick="selectFrame('${option.value}', '${option.name}')"> ${option.name} </div>
         `;
     });

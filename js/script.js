@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Handle frame selection
     window.uploadedImage = null;
     window.showFramesOption = false;
-    let frameImage = null;
+    window.frameImage = null;
 
     const frameGroup = frameSelect?.querySelector('#group');
     const frameSelected = frameSelect?.querySelector('#selected');

@@ -214,7 +214,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (frameGroup) frameGroup.innerHTML += `
             <div class="option input" onclick="selectFrame('${window.location.href + option.value}', '${option.name}')"> ${option.name} </div>
         `;
-        console.log(window.location.href + option.value);
     });
     selectFrame(frameOptions[0].value, frameOptions[0].name);
 

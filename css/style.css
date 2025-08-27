@@ -349,7 +349,7 @@ nav #menu #group .item:hover::after {
 
 #edit.section {
     background-image: url('imgs/edit-background.png');
-    height: fit-content;
+    height: fit-content !important;
     min-height: 100vh;
     display: flex;
     justify-content: center;

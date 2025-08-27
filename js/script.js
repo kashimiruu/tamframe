@@ -24,6 +24,7 @@ function selectFrame(value, name) {
 }
 
 function toggleFrames() {
+    if (!frameSelect) return;
     showFramesOption = !showFramesOption;
     if (showFramesOption) frameSelect.classList.add('toggled')
     else frameSelect.classList.remove('toggled');
@@ -59,44 +60,46 @@ function preloadAssets(imagePaths, callback) {
     });
 }
 
-// Draw preview function
+// Draw previews
 function drawPreview() {
-    ctx?.clearRect(0, 0, canvas.width, canvas.height);
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // ✅ White background
     if (ctx) ctx.fillStyle = "white";
-    ctx?.fillRect(0, 0, canvas.width, canvas.height);
-
-    const basePaddingPercent = 15; // Base padding in percent
-    const zoomMultiplier = parseFloat(paddingSlider?.value); // 0.5 to 2
-    const paddingPercent = (basePaddingPercent * zoomMultiplier) / 100; // fixed
-    const usableWidth = canvas.width * (1 - 2 * paddingPercent);
-    const usableHeight = canvas.height * (1 - 2 * paddingPercent);
-    const offsetXCanvas = canvas.width * paddingPercent;
-    const offsetYCanvas = canvas.height * paddingPercent;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     if (uploadedImage) {
         const imgRatio = uploadedImage.width / uploadedImage.height;
-        const canvasRatio = usableWidth / usableHeight;
+        const canvasRatio = canvas.width / canvas.height;
         let drawWidth, drawHeight, offsetX, offsetY;
 
         if (imgRatio > canvasRatio) {
-            // ✅ Wider image → fit width
-            drawWidth = usableWidth;
-            drawHeight = usableWidth / imgRatio;
-            offsetX = offsetXCanvas;
-            offsetY = offsetYCanvas + (usableHeight - drawHeight) / 2;
+            // ✅ Image is wider → fit height, crop sides
+            drawHeight = canvas.height;
+            drawWidth = drawHeight * imgRatio;
+            offsetX = (canvas.width - drawWidth) / 2;
+            offsetY = 0;
         } else {
-            // ✅ Taller image → fit height
-            drawHeight = usableHeight;
-            drawWidth = usableHeight * imgRatio;
-            offsetX = offsetXCanvas + (usableWidth - drawWidth) / 2;
-            offsetY = offsetYCanvas;
+            // ✅ Image is taller → fit width, crop top/bottom
+            drawWidth = canvas.width;
+            drawHeight = drawWidth / imgRatio;
+            offsetX = 0;
+            offsetY = (canvas.height - drawHeight) / 2;
         }
 
-        // ✅ Apply horizontal and vertical alignment sliders
-        const hOffset = (hAlignSlider.value / 100) * usableWidth; // -50% to 50%
-        const vOffset = (vAlignSlider.value / 100) * usableHeight; // -50% to 50%
+        // ✅ Apply zoom (paddingSlider as zoom multiplier)
+        const zoom = parseFloat(paddingSlider?.value || 1); // default 1
+        drawWidth *= zoom;
+        drawHeight *= zoom;
+
+        // ✅ Recenter after zoom
+        offsetX = (canvas.width - drawWidth) / 2;
+        offsetY = (canvas.height - drawHeight) / 2;
+
+        // ✅ Apply alignment sliders
+        const hOffset = (hAlignSlider.value / 100) * canvas.width; 
+        const vOffset = (vAlignSlider.value / 100) * canvas.height; 
         offsetX += hOffset;
         offsetY += vOffset;
 
@@ -119,7 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const editView = document.querySelector('#editView');
     const backBtn = document.querySelector('#bakcBtn');
     const editBtn = document.querySelector('#editBtn');
-    const frameSelect = document.getElementById('frameSelect');
+    window.frameSelect = document.getElementById('frameSelect');
     const uploadInput = document.getElementById('upload');
     window.paddingSlider = document.getElementById('paddingSlider');
     window.hAlignSlider = document.getElementById('hAlignSlider');
@@ -185,7 +188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const frameSelected = frameSelect?.querySelector('#selected');
     frameSelected,addEventListener('click', toggleFrames);
     body.addEventListener('click', (event) => {
-        if (!frameSelected.contains(event.target)) {
+        if (!frameSelected?.contains(event.target)) {
             showFramesOption = false;
             toggleFrames();
         }
@@ -196,7 +199,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     frameOptions.forEach(option => {
         if (frameGroup) frameGroup.innerHTML += `
-            <div class="option input" onclick="selectFrame('${window.location.href + option.value}', '${option.name}')"> ${option.name} </div>
+            <div class="option input" onclick="selectFrame('${option.value}', '${option.name}')"> ${option.name} </div>
         `;
     });
     selectFrame(frameOptions[0].value, frameOptions[0].name);

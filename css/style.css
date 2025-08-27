@@ -168,7 +168,7 @@ nav #menu #group .item:hover::after {
     overflow: hidden;
     scroll-behavior: smooth;
     position: sticky;
-    top: 0;
+    bottom: 0;
 }
 .section > * {
     position: absolute;

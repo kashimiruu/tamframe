@@ -174,8 +174,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const frameOptions = [
         {
-            name: "College of Computer Studies",
-            value: "frames/faculty-it.png",
+            name: "IT Week: Where Talent Meets",
+            value: "frames/it-week.png",
+        },
+        {
+            name: "Paraverse",
+            value: "frames/paraverse.png",
         },
     ]
 

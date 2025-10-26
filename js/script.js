@@ -275,13 +275,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Usage in your index.js
     window.addEventListener("load", () => {
-        const framePaths = [
-            "frames/faculty-it.png",
-            "frames/student-agd.png",
-            "frames/student-cst.png",
-            "frames/student-se.png",
-            "frames/student-wma.png"
-        ];
+        const framePaths = frameOptions.map(option => option.value);
 
         preloadAssets(framePaths, () => {
             hideCover(loadingCover);
